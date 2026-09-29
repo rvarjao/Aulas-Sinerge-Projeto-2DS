@@ -47,7 +47,7 @@ app.py               cria a aplicação Flask e registra as rotas
 config.py            configurações (SECRET_KEY)
 database.py          conexão e criação das tabelas do SQLite
 models/              um arquivo por entidade, com os SQLs (CRUD):
-                     clientes, veiculos, servicos_disponiveis, servicos
+                     clientes, veiculos, catalogo, servicos
 routes/              um arquivo por entidade, com as rotas (Blueprints)
 templates/           páginas HTML com Jinja2
 static/css/          estilos da interface

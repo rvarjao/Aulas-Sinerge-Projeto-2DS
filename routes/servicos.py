@@ -2,7 +2,7 @@ from datetime import date
 
 from flask import Blueprint, flash, redirect, render_template, request, url_for
 
-from models import servicos, servicos_disponiveis, veiculos
+from models import catalogo, servicos, veiculos
 from validators import converter_preco
 
 servicos_bp = Blueprint("servicos", __name__, url_prefix="/servicos")
@@ -14,7 +14,7 @@ def _form(servico):
         "servicos/form.html",
         servico=servico,
         veiculos=veiculos.listar_veiculos(),
-        catalogo=servicos_disponiveis.listar_servicos_disponiveis(),
+        catalogo=catalogo.listar_itens(),
         hoje=date.today().isoformat(),
     )
 
@@ -22,11 +22,11 @@ def _form(servico):
 def _ler_formulario():
     """Retorna os dados validados ou None (já com flash de erro)."""
     veiculo_id = request.form.get("veiculo_id", type=int)
-    item_id = request.form.get("servico_disponivel_id", type=int)
+    item_id = request.form.get("catalogo_id", type=int)
     data = request.form["data"].strip()
     observacao = request.form["observacao"].strip()
 
-    item = servicos_disponiveis.buscar_servico_disponivel(item_id) if item_id else None
+    item = catalogo.buscar_item(item_id) if item_id else None
     if not veiculo_id or item is None or not data:
         flash("Informe veículo, serviço e data.", "danger")
         return None

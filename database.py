@@ -40,7 +40,7 @@ def init_db():
         );
 
         -- Catálogo: os serviços que o lava rápido oferece.
-        CREATE TABLE IF NOT EXISTS servicos_disponiveis (
+        CREATE TABLE IF NOT EXISTS catalogo (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             nome TEXT NOT NULL UNIQUE,
             preco REAL NOT NULL,
@@ -52,7 +52,7 @@ def init_db():
         CREATE TABLE IF NOT EXISTS servicos (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             veiculo_id INTEGER NOT NULL REFERENCES veiculos (id),
-            servico_disponivel_id INTEGER NOT NULL REFERENCES servicos_disponiveis (id),
+            catalogo_id INTEGER NOT NULL REFERENCES catalogo (id),
             preco REAL NOT NULL,
             data TEXT NOT NULL DEFAULT CURRENT_DATE,
             observacao TEXT

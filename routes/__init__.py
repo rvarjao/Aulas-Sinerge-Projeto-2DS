@@ -2,7 +2,7 @@ from routes.auth import auth_bp
 from routes.clientes import clientes_bp
 from routes.main import main_bp
 from routes.servicos import servicos_bp
-from routes.servicos_disponiveis import catalogo_bp
+from routes.catalogo import catalogo_bp
 from routes.veiculos import veiculos_bp
 
 

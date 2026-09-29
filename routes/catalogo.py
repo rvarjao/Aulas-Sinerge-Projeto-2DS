@@ -1,6 +1,6 @@
 from flask import Blueprint, flash, redirect, render_template, request, url_for
 
-from models import servicos_disponiveis as catalogo
+from models import catalogo
 from validators import converter_preco
 
 catalogo_bp = Blueprint("catalogo", __name__, url_prefix="/catalogo")
@@ -16,7 +16,7 @@ def _ler_formulario():
 @catalogo_bp.route("/")
 def listar():
     return render_template(
-        "catalogo/lista.html", itens=catalogo.listar_servicos_disponiveis()
+        "catalogo/lista.html", itens=catalogo.listar_itens()
     )
 
 
@@ -29,7 +29,7 @@ def novo():
             flash("Informe o nome e um preço válido.", "danger")
             return render_template("catalogo/form.html", item=request.form)
 
-        if not catalogo.criar_servico_disponivel(nome, preco, descricao):
+        if not catalogo.criar_item(nome, preco, descricao):
             flash("Já existe um serviço com este nome.", "danger")
             return render_template("catalogo/form.html", item=request.form)
 
@@ -41,7 +41,7 @@ def novo():
 
 @catalogo_bp.route("/<int:item_id>/editar", methods=["GET", "POST"])
 def editar(item_id):
-    item = catalogo.buscar_servico_disponivel(item_id)
+    item = catalogo.buscar_item(item_id)
     if item is None:
         flash("Serviço não encontrado.", "danger")
         return redirect(url_for("catalogo.listar"))
@@ -53,7 +53,7 @@ def editar(item_id):
             flash("Informe o nome e um preço válido.", "danger")
             return render_template("catalogo/form.html", item=request.form)
 
-        if not catalogo.atualizar_servico_disponivel(item_id, nome, preco, descricao):
+        if not catalogo.atualizar_item(item_id, nome, preco, descricao):
             flash("Já existe um serviço com este nome.", "danger")
             return render_template("catalogo/form.html", item=request.form)
 
@@ -65,7 +65,7 @@ def editar(item_id):
 
 @catalogo_bp.route("/<int:item_id>/excluir", methods=["POST"])
 def excluir(item_id):
-    if catalogo.excluir_servico_disponivel(item_id):
+    if catalogo.excluir_item(item_id):
         flash("Serviço removido do catálogo.", "success")
     else:
         flash("Não é possível excluir: este serviço já foi realizado.", "danger")

@@ -10,10 +10,10 @@
         <option value="">Selecione...</option>
         {% for v in veiculos %}<option value="{{ v['id'] }}" {{ 'selected' if servico and servico['veiculo_id']|string == v['id']|string }}>{{ v['placa'] }} · {{ v['modelo'] }} ({{ v['cliente_nome'] }})</option>{% endfor %}
       </select></div>
-    <div class="mb-3"><label class="form-label" for="servico_disponivel_id">Serviço</label>
-      <select class="form-select" id="servico_disponivel_id" name="servico_disponivel_id" required>
+    <div class="mb-3"><label class="form-label" for="catalogo_id">Serviço</label>
+      <select class="form-select" id="catalogo_id" name="catalogo_id" required>
         <option value="">Selecione...</option>
-        {% for i in catalogo %}<option value="{{ i['id'] }}" {{ 'selected' if servico and servico['servico_disponivel_id']|string == i['id']|string }}>{{ i['nome'] }} — R$ {{ '%.2f'|format(i['preco']) }}</option>{% endfor %}
+        {% for i in catalogo %}<option value="{{ i['id'] }}" {{ 'selected' if servico and servico['catalogo_id']|string == i['id']|string }}>{{ i['nome'] }} — R$ {{ '%.2f'|format(i['preco']) }}</option>{% endfor %}
       </select></div>
     <div class="mb-3"><label class="form-label" for="preco">Preço cobrado (R$)</label><input class="form-control" id="preco" name="preco" inputmode="decimal" value="{{ servico['preco'] if servico else '' }}"><div class="form-text">Deixe em branco para usar o preço do catálogo.</div></div>
     <div class="mb-3"><label class="form-label" for="data">Data</label><input class="form-control" type="date" id="data" name="data" value="{{ servico['data'] if servico else hoje }}" required></div>
