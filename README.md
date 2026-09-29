@@ -49,11 +49,11 @@ database.py          conexão e criação das tabelas do SQLite
 models/              um arquivo por entidade, com os SQLs (CRUD):
                      clientes, veiculos, catalogo, servicos
 routes/              um arquivo por entidade, com as rotas (Blueprints)
-templates/           páginas HTML com Jinja2
+templates/           páginas HTML com Jinja2 (uma subpasta por entidade)
 static/css/          estilos da interface
 ```
 
-Para criar uma entidade nova (ex.: `livros`): crie a tabela em `database.py`, o arquivo `models/livros.py` com os SQLs, o arquivo `routes/livros.py` com um Blueprint e registre-o em `routes/__init__.py`. Use `models/clientes.py` e `routes/clientes.py` como modelo. Nos templates, os endpoints levam o nome do Blueprint, como `url_for('livros.listar')`.
+Para criar uma entidade nova (ex.: `livros`): crie a tabela em `database.py`, o arquivo `models/livros.py` com os SQLs, o arquivo `routes/livros.py` com um Blueprint (registrado em `routes/__init__.py`) e a pasta `templates/livros/` com as páginas. Use `models/clientes.py`, `routes/clientes.py` e `templates/clientes/` como modelo. Nos templates, os endpoints levam o nome do Blueprint, como `url_for('livros.listar')`.
 
 ## O que você deverá modificar
 
