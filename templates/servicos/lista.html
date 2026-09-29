@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Serviços realizados | Lava Rápido{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div><h1 class="mb-1">Serviços realizados</h1><p class="text-body-secondary mb-0">Histórico de atendimentos. Total: <strong>R$ {{ '%.2f'|format(total) }}</strong></p></div>
+  <a class="btn btn-primary" href="{{ url_for('servicos.novo') }}">Registrar serviço</a>
+</div>
+{% if servicos %}
+<div class="table-responsive card shadow-sm"><table class="table table-hover mb-0"><thead><tr><th>Data</th><th>Serviço</th><th>Veículo</th><th>Cliente</th><th>Preço</th><th>Obs.</th><th class="text-end">Ações</th></tr></thead><tbody>
+{% for s in servicos %}<tr><td>{{ s['data'] }}</td><td class="fw-semibold">{{ s['servico_nome'] }}</td><td>{{ s['placa'] }} · {{ s['modelo'] }}</td><td>{{ s['cliente_nome'] }}</td><td>R$ {{ '%.2f'|format(s['preco']) }}</td><td>{{ s['observacao'] or '—' }}</td><td class="text-end"><a class="btn btn-sm btn-outline-primary" href="{{ url_for('servicos.editar', servico_id=s['id']) }}">Editar</a> <form class="d-inline" method="post" action="{{ url_for('servicos.excluir', servico_id=s['id']) }}"><button class="btn btn-sm btn-outline-danger" type="submit" onclick="return confirm('Excluir este registro?')">Excluir</button></form></td></tr>{% endfor %}
+</tbody></table></div>
+{% else %}<div class="alert alert-info">Nenhum serviço registrado ainda.</div>{% endif %}
+{% endblock %}

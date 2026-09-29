@@ -46,13 +46,14 @@ Na primeira execução, o arquivo `database.db` e as tabelas `users` e `records`
 app.py               cria a aplicação Flask e registra as rotas
 config.py            configurações (SECRET_KEY)
 database.py          conexão e criação das tabelas do SQLite
-models/              um arquivo por entidade, com os SQLs (CRUD)
+models/              um arquivo por entidade, com os SQLs (CRUD):
+                     clientes, veiculos, servicos_disponiveis, servicos
 routes/              um arquivo por entidade, com as rotas (Blueprints)
 templates/           páginas HTML com Jinja2
 static/css/          estilos da interface
 ```
 
-Para criar uma entidade nova (ex.: `livros`): crie a tabela em `database.py`, o arquivo `models/livros.py` com os SQLs, o arquivo `routes/livros.py` com um Blueprint e registre-o em `routes/__init__.py`. Use `models/records.py` e `routes/records.py` como modelo. Nos templates, os endpoints levam o nome do Blueprint, como `url_for('livros.listar')`.
+Para criar uma entidade nova (ex.: `livros`): crie a tabela em `database.py`, o arquivo `models/livros.py` com os SQLs, o arquivo `routes/livros.py` com um Blueprint e registre-o em `routes/__init__.py`. Use `models/clientes.py` e `routes/clientes.py` como modelo. Nos templates, os endpoints levam o nome do Blueprint, como `url_for('livros.listar')`.
 
 ## O que você deverá modificar
 

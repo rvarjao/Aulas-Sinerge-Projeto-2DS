@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Veículos | Lava Rápido{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div><h1 class="mb-1">Veículos</h1><p class="text-body-secondary mb-0">Cada veículo pertence a um cliente.</p></div>
+  <a class="btn btn-primary" href="{{ url_for('veiculos.novo') }}">Novo veículo</a>
+</div>
+{% if veiculos %}
+<div class="table-responsive card shadow-sm"><table class="table table-hover mb-0"><thead><tr><th>Placa</th><th>Modelo</th><th>Cor</th><th>Cliente</th><th class="text-end">Ações</th></tr></thead><tbody>
+{% for v in veiculos %}<tr><td class="fw-semibold">{{ v['placa'] }}</td><td>{{ v['modelo'] }}</td><td>{{ v['cor'] or '—' }}</td><td>{{ v['cliente_nome'] }}</td><td class="text-end"><a class="btn btn-sm btn-outline-primary" href="{{ url_for('veiculos.editar', veiculo_id=v['id']) }}">Editar</a> <form class="d-inline" method="post" action="{{ url_for('veiculos.excluir', veiculo_id=v['id']) }}"><button class="btn btn-sm btn-outline-danger" type="submit" onclick="return confirm('Excluir este veículo?')">Excluir</button></form></td></tr>{% endfor %}
+</tbody></table></div>
+{% else %}<div class="alert alert-info">Nenhum veículo cadastrado. Cadastre um cliente primeiro.</div>{% endif %}
+{% endblock %}

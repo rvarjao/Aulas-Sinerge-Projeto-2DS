@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Editar' if veiculo else 'Novo' }} veículo | Lava Rápido{% endblock %}
+{% block content %}
+<div class="form-card card shadow-sm mx-auto"><div class="card-body p-4">
+  <h1 class="h3 mb-3">{{ 'Editar' if veiculo else 'Novo' }} veículo</h1>
+  {% if not clientes %}<div class="alert alert-warning">Cadastre um <a href="{{ url_for('clientes.novo') }}">cliente</a> antes de cadastrar veículos.</div>{% endif %}
+  <form method="post">
+    <div class="mb-3"><label class="form-label" for="cliente_id">Cliente</label>
+      <select class="form-select" id="cliente_id" name="cliente_id" required>
+        <option value="">Selecione...</option>
+        {% for c in clientes %}<option value="{{ c['id'] }}" {{ 'selected' if veiculo and veiculo['cliente_id']|string == c['id']|string }}>{{ c['nome'] }}</option>{% endfor %}
+      </select></div>
+    <div class="mb-3"><label class="form-label" for="placa">Placa</label><input class="form-control text-uppercase" id="placa" name="placa" value="{{ veiculo['placa'] if veiculo else '' }}" required></div>
+    <div class="mb-3"><label class="form-label" for="modelo">Modelo</label><input class="form-control" id="modelo" name="modelo" value="{{ veiculo['modelo'] if veiculo else '' }}" required></div>
+    <div class="mb-3"><label class="form-label" for="cor">Cor</label><input class="form-control" id="cor" name="cor" value="{{ (veiculo['cor'] or '') if veiculo else '' }}"></div>
+    <button class="btn btn-primary" type="submit">Salvar</button>
+    <a class="btn btn-outline-secondary" href="{{ url_for('veiculos.listar') }}">Cancelar</a>
+  </form>
+</div></div>
+{% endblock %}

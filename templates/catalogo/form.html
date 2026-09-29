@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Editar' if item else 'Novo' }} serviço do catálogo | Lava Rápido{% endblock %}
+{% block content %}
+<div class="form-card card shadow-sm mx-auto"><div class="card-body p-4">
+  <h1 class="h3 mb-3">{{ 'Editar' if item else 'Novo' }} serviço do catálogo</h1>
+  <form method="post">
+    <div class="mb-3"><label class="form-label" for="nome">Nome</label><input class="form-control" id="nome" name="nome" value="{{ item['nome'] if item else '' }}" required></div>
+    <div class="mb-3"><label class="form-label" for="preco">Preço (R$)</label><input class="form-control" id="preco" name="preco" inputmode="decimal" value="{{ item['preco'] if item else '' }}" required></div>
+    <div class="mb-3"><label class="form-label" for="descricao">Descrição</label><textarea class="form-control" id="descricao" name="descricao" rows="3">{{ (item['descricao'] or '') if item else '' }}</textarea></div>
+    <button class="btn btn-primary" type="submit">Salvar</button>
+    <a class="btn btn-outline-secondary" href="{{ url_for('catalogo.listar') }}">Cancelar</a>
+  </form>
+</div></div>
+{% endblock %}

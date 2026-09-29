@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Editar' if servico else 'Registrar' }} serviço | Lava Rápido{% endblock %}
+{% block content %}
+<div class="form-card card shadow-sm mx-auto"><div class="card-body p-4">
+  <h1 class="h3 mb-3">{{ 'Editar' if servico else 'Registrar' }} serviço</h1>
+  {% if not veiculos or not catalogo %}<div class="alert alert-warning">É preciso ter ao menos um <a href="{{ url_for('veiculos.listar') }}">veículo</a> e um serviço no <a href="{{ url_for('catalogo.listar') }}">catálogo</a>.</div>{% endif %}
+  <form method="post">
+    <div class="mb-3"><label class="form-label" for="veiculo_id">Veículo</label>
+      <select class="form-select" id="veiculo_id" name="veiculo_id" required>
+        <option value="">Selecione...</option>
+        {% for v in veiculos %}<option value="{{ v['id'] }}" {{ 'selected' if servico and servico['veiculo_id']|string == v['id']|string }}>{{ v['placa'] }} · {{ v['modelo'] }} ({{ v['cliente_nome'] }})</option>{% endfor %}
+      </select></div>
+    <div class="mb-3"><label class="form-label" for="servico_disponivel_id">Serviço</label>
+      <select class="form-select" id="servico_disponivel_id" name="servico_disponivel_id" required>
+        <option value="">Selecione...</option>
+        {% for i in catalogo %}<option value="{{ i['id'] }}" {{ 'selected' if servico and servico['servico_disponivel_id']|string == i['id']|string }}>{{ i['nome'] }} — R$ {{ '%.2f'|format(i['preco']) }}</option>{% endfor %}
+      </select></div>
+    <div class="mb-3"><label class="form-label" for="preco">Preço cobrado (R$)</label><input class="form-control" id="preco" name="preco" inputmode="decimal" value="{{ servico['preco'] if servico else '' }}"><div class="form-text">Deixe em branco para usar o preço do catálogo.</div></div>
+    <div class="mb-3"><label class="form-label" for="data">Data</label><input class="form-control" type="date" id="data" name="data" value="{{ servico['data'] if servico else hoje }}" required></div>
+    <div class="mb-3"><label class="form-label" for="observacao">Observação</label><textarea class="form-control" id="observacao" name="observacao" rows="3">{{ (servico['observacao'] or '') if servico else '' }}</textarea></div>
+    <button class="btn btn-primary" type="submit">Salvar</button>
+    <a class="btn btn-outline-secondary" href="{{ url_for('servicos.listar') }}">Cancelar</a>
+  </form>
+</div></div>
+{% endblock %}

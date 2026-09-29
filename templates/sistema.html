@@ -1,16 +1,14 @@
 {% extends "base.html" %}
-{% block title %}Sistema | Meu Projeto{% endblock %}
+{% block title %}Sistema | Lava Rápido{% endblock %}
 {% block content %}
 <div class="mb-4">
-  <h1>Área principal do sistema</h1>
-  <!-- ALTERE AQUI: descreva a funcionalidade principal do projeto -->
-  <p class="lead">Substitua esta funcionalidade pela funcionalidade principal do seu projeto.</p>
+  <h1>Painel do lava rápido</h1>
+  <p class="lead">Cadastre clientes e veículos, mantenha o catálogo de serviços e registre cada lavagem realizada.</p>
 </div>
 <div class="row g-3">
-  <!-- EXEMPLOS: adapte estes atalhos ou crie os do seu sistema. -->
-  <div class="col-md-6 col-lg-3"><a class="card card-action h-100 text-decoration-none" href="{{ url_for('records.novo_registro') }}"><div class="card-body"><h2 class="h5">Novo registro</h2><p class="mb-0 text-body-secondary">Exemplo de INSERT.</p></div></a></div>
-  <div class="col-md-6 col-lg-3"><a class="card card-action h-100 text-decoration-none" href="{{ url_for('records.listar_registros') }}"><div class="card-body"><h2 class="h5">Listar registros</h2><p class="mb-0 text-body-secondary">Exemplo de SELECT.</p></div></a></div>
-  <div class="col-md-6 col-lg-3"><div class="card h-100"><div class="card-body"><h2 class="h5">Editar</h2><p class="mb-0 text-body-secondary">Exemplo disponível na listagem.</p></div></div></div>
-  <div class="col-md-6 col-lg-3"><div class="card h-100"><div class="card-body"><h2 class="h5">Excluir</h2><p class="mb-0 text-body-secondary">Exemplo disponível na listagem.</p></div></div></div>
+  <div class="col-md-6 col-lg-3"><a class="card card-action h-100 text-decoration-none" href="{{ url_for('clientes.listar') }}"><div class="card-body"><h2 class="h5">Clientes</h2><p class="mb-0 text-body-secondary">Donos dos veículos.</p></div></a></div>
+  <div class="col-md-6 col-lg-3"><a class="card card-action h-100 text-decoration-none" href="{{ url_for('veiculos.listar') }}"><div class="card-body"><h2 class="h5">Veículos</h2><p class="mb-0 text-body-secondary">Placa, modelo e cor.</p></div></a></div>
+  <div class="col-md-6 col-lg-3"><a class="card card-action h-100 text-decoration-none" href="{{ url_for('catalogo.listar') }}"><div class="card-body"><h2 class="h5">Catálogo</h2><p class="mb-0 text-body-secondary">Serviços e preços oferecidos.</p></div></a></div>
+  <div class="col-md-6 col-lg-3"><a class="card card-action h-100 text-decoration-none" href="{{ url_for('servicos.listar') }}"><div class="card-body"><h2 class="h5">Serviços realizados</h2><p class="mb-0 text-body-secondary">Histórico de atendimentos.</p></div></a></div>
 </div>
 {% endblock %}

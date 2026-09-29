@@ -1,12 +1,12 @@
 {% extends "base.html" %}
-{% block title %}Início | Meu Projeto{% endblock %}
+{% block title %}Início | Lava Rápido{% endblock %}
 {% block content %}
 <section class="hero rounded-4 p-5 text-center shadow-sm">
   <!-- ALTERE AQUI: coloque o nome do seu projeto -->
-  <p class="text-uppercase fw-semibold mb-2">Projeto-base Flask</p>
-  <h1 class="display-5 fw-bold">Nome do seu sistema</h1>
+  <p class="text-uppercase fw-semibold mb-2">Gestão de lava rápido</p>
+  <h1 class="display-5 fw-bold">Lava Rápido</h1>
   <!-- ALTERE AQUI: explique brevemente o que o seu projeto resolve -->
-  <p class="lead mx-auto mt-3">Uma descrição breve do projeto que seu grupo irá desenvolver.</p>
+  <p class="lead mx-auto mt-3">Controle clientes, veículos e o histórico de serviços realizados, com um catálogo de serviços e preços sempre à mão.</p>
   <div class="mt-4 d-flex justify-content-center gap-2 flex-wrap">
     <a class="btn btn-primary btn-lg" href="{{ url_for('auth.login') }}">Acessar sistema</a>
     <a class="btn btn-outline-primary btn-lg" href="{{ url_for('auth.cadastro') }}">Criar conta</a>
